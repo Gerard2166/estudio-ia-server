@@ -1,3 +1,8 @@
+bash
+
+cat /home/claude/servidor/server.js
+Salida
+
 const express = require('express');
 const cors = require('cors');
 
@@ -56,7 +61,7 @@ REQUISITOS: esquema 5-7 puntos, test exactamente 10 preguntas (índice correcta 
 
   try {
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -86,3 +91,4 @@ REQUISITOS: esquema 5-7 puntos, test exactamente 10 preguntas (índice correcta 
 });
 
 app.listen(PORT, () => console.log(`Servidor EstudioIA en puerto ${PORT}`));
+
