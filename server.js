@@ -1,8 +1,3 @@
-bash
-
-cat /home/claude/servidor/server.js
-Salida
-
 const express = require('express');
 const cors = require('cors');
 
@@ -36,22 +31,7 @@ app.post('/generar', async (req, res) => {
     ? `El estudiante ha proporcionado este texto:\n\n${texto}`
     : 'El estudiante ha subido una imagen. Extrae el texto y úsalo como base.';
 
-  const prompt = `${textContext}
-
-Genera material de estudio en ${idiomaNombre}. Responde SOLO con JSON válido sin markdown:
-
-{
-  "resumen": "Párrafo claro de 5-8 líneas con los conceptos más importantes.",
-  "esquema": ["Punto 1: descripción","Punto 2: descripción","Punto 3: descripción","Punto 4: descripción","Punto 5: descripción"],
-  "test": [
-    {"pregunta":"texto","opciones":["A. op","B. op","C. op","D. op"],"correcta":1}
-  ],
-  "flashcards": [
-    {"pregunta":"¿Pregunta?","respuesta":"Respuesta clara"}
-  ]
-}
-
-REQUISITOS: esquema 5-7 puntos, test exactamente 10 preguntas (índice correcta 0-3), flashcards exactamente 5. Solo JSON.`;
+  const prompt = `${textContext}\n\nGenera material de estudio en ${idiomaNombre}. Responde SOLO con JSON válido sin markdown:\n\n{"resumen":"Párrafo claro de 5-8 líneas.","esquema":["Punto 1","Punto 2","Punto 3","Punto 4","Punto 5"],"test":[{"pregunta":"texto","opciones":["A. op","B. op","C. op","D. op"],"correcta":1}],"flashcards":[{"pregunta":"¿Pregunta?","respuesta":"Respuesta"}]}\n\nREQUISITOS: esquema 5-7 puntos, test exactamente 10 preguntas, flashcards exactamente 5. Solo JSON.`;
 
   const parts = [];
   if (imagenBase64 && imagenTipo) {
@@ -91,4 +71,3 @@ REQUISITOS: esquema 5-7 puntos, test exactamente 10 preguntas (índice correcta 
 });
 
 app.listen(PORT, () => console.log(`Servidor EstudioIA en puerto ${PORT}`));
-
